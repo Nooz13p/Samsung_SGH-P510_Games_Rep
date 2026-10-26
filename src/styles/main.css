@@ -1,0 +1,110 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #10171e;
+  color: #c5d3de;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100svh;
+  padding: max(12px, env(safe-area-inset-top))
+    max(12px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+  display: grid;
+  place-items: center;
+}
+main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+}
+canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  touch-action: none;
+  user-select: none;
+  outline-offset: 4px;
+  background: #dce9f6;
+}
+nav {
+  width: var(--screen-width, 256px);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+button {
+  font: inherit;
+  background: #213546;
+  border: 1px solid #4c657a;
+  border-radius: 3px;
+  color: #e7eff5;
+  min-height: 44px;
+  padding: 8px 14px;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #a1ccff;
+  outline-offset: 3px;
+}
+nav button {
+  flex: 1;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.options button {
+  padding: 6px 10px;
+}
+label {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+label[hidden] {
+  display: none;
+}
+details {
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 440px;
+}
+summary {
+  cursor: pointer;
+  min-height: 32px;
+  text-align: center;
+}
+a {
+  color: #b4d5f4;
+}
+.caption {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #8b9dab;
+  line-height: 1.8;
+}
+.caption span {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

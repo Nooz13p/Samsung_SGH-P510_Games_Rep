@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#163e88" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <title>Samsung SGH-P510 · Games & More</title>
+  </head>
+  <body>
+    <main>
+      <canvas
+        id="screen"
+        width="128"
+        height="160"
+        tabindex="0"
+        aria-label="Games & More. Use arrows to select a game and Enter to launch."
+      ></canvas>
+      <p id="state" class="sr-only" aria-live="polite"></p>
+      <nav aria-label="Game controls">
+        <button id="left">Select</button><button id="right">Help</button>
+      </nav>
+      <section class="options">
+        <button id="sound" aria-pressed="false">Sound off</button
+        ><button id="help">Controls</button><button id="restart">Restart</button
+        ><button id="home">Games</button
+        ><label id="direction-label" hidden
+          ><input type="checkbox" id="direction" /> Rotate left</label
+        >
+      </section>
+      <details id="instructions">
+        <summary>About this preservation build</summary>
+        <p>
+          Evidence-informed playable approximations. P510 footage and the manual
+          have not been accessed; this is not a verified replica.
+        </p>
+        <p>
+          BubbleSmile: select a triangle, then tap it again to rotate. Line up
+          three of a color. Arrows or 2/4/6/8 move; Enter/5 rotates right;
+          Space/1 rotates left. Reach the score target before time expires.
+        </p>
+        <p>
+          Fun2Link: tap to place the first queued pipe. Connect S to E through
+          at least the indicated number of pipes before the water escapes.
+          Arrows move; Enter/5 places; Space/* speeds water up. Wet pipes cannot
+          be replaced.
+        </p>
+        <p>
+          Escape pauses. Enter resumes. Games returns to the launcher. Sound is
+          an optional synthesized approximation. Progression and scoring are
+          provisional.
+        </p>
+        <p>
+          <a
+            href="https://github.com/itnika13p/Samsung_SGH-P510_Games/tree/main/docs/research"
+            >Research and confidence labels</a
+          >
+        </p>
+      </details>
+      <p class="caption">
+        SGH-P510 · preservation study<br /><span
+          >Approximate artwork & rules · no original footage verified</span
+        >
+      </p>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
