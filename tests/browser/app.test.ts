@@ -169,3 +169,34 @@ test("mobile touch launches and pauses without scrolling", async ({
   await expect(c).toHaveAttribute("aria-label", /playing/);
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
 });
+
+test("recorded pipe-game Back and # controls restore the launcher", async ({
+  page,
+}) => {
+  await page.goto("./");
+  const c = page.locator("canvas");
+  await c.focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await expect(c).toHaveAttribute(
+    "aria-label",
+    /Games & More selected Fun2Link/,
+  );
+  await c.focus();
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("#");
+  await expect(c).toHaveAttribute(
+    "aria-label",
+    /Games & More selected Fun2Link/,
+  );
+  await page.keyboard.press("Enter");
+  const b = (await c.boundingBox())!;
+  await c.click({
+    position: { x: (b.width * 115) / 128, y: (b.height * 154) / 160 },
+  });
+  await expect(c).toHaveAttribute(
+    "aria-label",
+    /Games & More selected Fun2Link/,
+  );
+});

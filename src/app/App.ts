@@ -76,7 +76,11 @@ export class App {
       );
     };
     document.querySelector<HTMLButtonElement>("#right")!.onclick = () =>
-      this.game ? this.input("back") : this.help();
+      this.game instanceof Fun2LinkGame
+        ? this.home()
+        : this.game
+          ? this.input("back")
+          : this.help();
     document.querySelector<HTMLButtonElement>("#help")!.onclick = () =>
       this.help();
     document.querySelector<HTMLButtonElement>("#home")!.onclick = () =>
@@ -149,6 +153,10 @@ export class App {
     this.loop.reset();
   }
   input(action: string) {
+    if (action === "home") {
+      this.home();
+      return;
+    }
     if (!this.game) {
       if (["down", "up", "left", "right"].includes(action)) {
         this.selected = 1 - this.selected;
@@ -208,10 +216,9 @@ export class App {
       this.input("action");
       return;
     }
-    if (y >= 148) {
-      if (x >= 64) this.input("back");
-      else
-        this.input(this.game instanceof Fun2LinkGame ? "secondary" : "action");
+    if (y >= 148 && this.game instanceof Fun2LinkGame) {
+      if (x >= 64) this.home();
+      else this.input("secondary");
       return;
     }
     if (this.game instanceof Fun2LinkGame) {
@@ -278,7 +285,9 @@ export class App {
             : "Rotate"
         : "Select";
       document.querySelector("#right")!.textContent = this.game
-        ? "Pause"
+        ? this.game instanceof Fun2LinkGame
+          ? "Back"
+          : "Pause"
         : "Help";
       document.querySelector<HTMLElement>("#direction-label")!.hidden = !(
         this.game instanceof BubbleSmileGame

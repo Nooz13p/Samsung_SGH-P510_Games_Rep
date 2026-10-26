@@ -20,3 +20,7 @@ Priority audit: firmware/game file search could not establish a legally sourced 
 - catsmile: `fdc8c6868e013f629a408e56fe1f031a4f7cdc5e`.
 
 No inference from repository naming alone is treated as original-phone evidence.
+
+## Supplied footage, inspected 2026-10-27
+
+Both smaller uploads were downloaded and decoded successfully. See [uploaded-video-analysis.md](uploaded-video-analysis.md) for file hashes, exact sampled timestamps, scope of confidence and four full reference frames. BubbleSmile identity is directly verified by its logo; the pipe game's Fun2Link identification is strongly inferred. The Rutube page still was not accessed. Previous statements that no frames were available are historical access-log entries, superseded by this uploaded evidence. All decoded PCM samples are zero in both clips; original sound remains unknown.

@@ -1,5 +1,13 @@
 # Fun2Link
 
+## Current evidence update — 2026-10-27
+
+Actual uploaded video frames have now been inspected. See [timestamped findings and reference frames](uploaded-video-analysis.md). The original access failures below describe the first implementation baseline, not the current availability of footage.
+
+The grey field, queue, Dest/Score HUD, cyan water, Fast/Slow/Back# labels and result values (8 links, 1 cross, 300 bonus, 2000 total) are VERIFIED in footage. Identification as Fun2Link is STRONGLY INFERRED from the mechanic and X120 comparison; no readable title was observed. The old ochre palette was contradicted and replaced with a grey approximation. The scoring formula remains APPROXIMATED and differs from the recorded outcome. Back/# now returns to the launcher. Exact geometry and timing remain UNKNOWN.
+
+## Original implementation baseline (historical record)
+
 ## Scope
 
 Playable pipe-routing approximation based on inspected Samsung X120 port behavior. P510 equivalence UNKNOWN. This is not Mahjong connect.

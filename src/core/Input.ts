@@ -15,6 +15,7 @@ export function keyAction(key: string) {
       "1": "reverse",
       Escape: "back",
       "*": "secondary",
+      "#": "home",
     } as Record<string, string>
   )[key];
 }

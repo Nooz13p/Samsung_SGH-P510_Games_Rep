@@ -1,5 +1,13 @@
 # BubbleSmile
 
+## Current evidence update — 2026-10-27
+
+Actual uploaded video frames have now been inspected. See [timestamped findings and reference frames](uploaded-video-analysis.md). The original access failures below describe the first implementation baseline, not the current availability of footage.
+
+The title and Timed/Skilled Mode labels, aqua field, character faces, SCORE/ROT. layout and score/combo popups are VERIFIED in the supplied footage. Exact P510 model attribution is STRONGLY INFERRED from user provenance. Exact mode rules, scoring formula, palette RGB values and native sprite dimensions remain UNKNOWN. Artwork/layout have been revised accordingly. The browser still uses its provisional timer/level model and does not implement the mode selector: it is not a recreation of the filmed Skilled Mode rules.
+
+## Original implementation baseline (historical record)
+
 ## Scope
 
 Playable evidence-informed approximation, NOT a verified P510 replica. Source: [sources](sources.md), independent catsmile remake. No P510 frames were inspected.

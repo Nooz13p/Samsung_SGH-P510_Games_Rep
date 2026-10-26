@@ -29,7 +29,7 @@ export function triangle(x: number, y: number): Cell[] {
       ];
 }
 export function bubblePosition(x: number, y: number): Cell {
-  return [9 + x * 16 + (y % 2) * 8, 36 + y * 13];
+  return [9 + x * 16 + (y % 2) * 8, 40 + y * 13];
 }
 export class BubbleBoard {
   cells: number[][];

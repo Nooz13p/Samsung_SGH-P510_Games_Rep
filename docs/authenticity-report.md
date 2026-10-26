@@ -1,58 +1,36 @@
 # Authenticity and validation report
 
-## Status
+## Current footage revision — 2026-10-27
 
-**Playable evidence-informed approximations. Historical SGH-P510 equivalence is unverified.** No original P510 firmware/game file, gameplay frames, readable manual or exact-phone screenshots were obtained. The user-provided Rutube URL failed at proxy CONNECT (403); its game identity is UNKNOWN. No frame analysis or sound analysis is claimed.
+Two smaller uploaded clips were downloaded, decoded and their frames actually inspected. [Timestamped evidence](research/uploaded-video-analysis.md) includes provenance hashes and four full reference frames. BubbleSmile is verified by its logo; the pipe game's Fun2Link identity is strongly inferred from its distinctive behavior and related source, without an observed title. Exact P510 model identity is inferred from user provenance, not a readable model label.
 
-The implementation does not satisfy the stronger goal of a verified original-phone reconstruction. It provides two independently playable games based on the closest actually inspected evidence, with uncertainty recorded in [BubbleSmile](research/BubbleSmile.md), [Fun2Link](research/Fun2Link.md), [hardware](research/SGH-P510-hardware.md), and the [source/access log](research/sources.md).
+Both decoded audio tracks contain only zero PCM samples, so original sounds remain unknown. The native LCD resolution cannot be measured from the encoded camera-recording resolution. The 128 × 160 framebuffer is still provisional.
 
-## Evidence versus implementation
+| Area             | Before                                              | Corrected from footage                                                                                                                          | Remaining gap                                                                                                                    |
+| ---------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| BubbleSmile      | Identical smile faces, dark board                   | Seven independently drawn facial styles; aqua patterned field; logo/SCORE header and ROT. strip; unverified blue bottom strip removed           | Original pixels, palette, font, mode rules and score formula unknown                                                             |
+| Fun2Link         | Ochre grid, brown pipes, score separated from queue | Grey textured field without empty-cell borders; metallic pipes; upper-left queue, upper-right Dest/Score; cyan meter/water; Fast/Slow and Back# | Exact grid geometry, queue direction and animation speeds unknown                                                                |
+| Fun2Link Back    | Pause adaptation                                    | Back button, footer and # return to launcher; Escape still pauses                                                                               | Original navigation confirmation/dialog sequence unknown                                                                         |
+| Scores and modes | Provisional independent model                       | Preserved as explicitly approximate                                                                                                             | Footage shows Timed/Skilled options and pipe results 8 links / 1 cross / 300 bonus / 2000 total, not enough for general formulas |
 
-| Aspect                    | Evidence actually inspected                                                                                                            | Browser implementation / discrepancy                                                                                                                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BubbleSmile core          | Independent catsmile remake source                                                                                                     | Three-bubble triangular rotation, horizontal and diagonal line removal, seven colors, replacement falls; not verified on P510                                     |
-| BubbleSmile artwork       | No original screenshot available                                                                                                       | Independent 14 × 14 smile faces, colors and layout all approximations                                                                                             |
-| BubbleSmile motion        | Remake rotates and drops circles                                                                                                       | 180 ms pixel-stepped rotation and blinking clear; refills snap rather than reproducing original drop animation                                                    |
-| Fun2Link core             | X120 port Java sources, stage.0, viewed Screenshot_2.png                                                                               | Queued pipes, timed water, compatible directional connections, minimum length and sink; P510 identity unknown                                                     |
-| Fun2Link layout           | X120 screenshot shows four queued pieces, ochre textured ground, brown dimensional pipes, black margin, purple Fast/yellow Back labels | Four-piece queue and ochre board retained in broad style; simpler flat independent tiles, eight fully visible columns, header score and blue softkey strip differ |
-| Fun2Link sprite placement | X120 source draws 16-pixel cells with clipped border                                                                                   | Browser draws 16-pixel cells without X120 clipping; source/sink use independent S/E labels rather than copied artwork                                             |
-| Screen                    | No verified P510 dimensions                                                                                                            | Provisional 128 × 160; must be corrected if original evidence contradicts it                                                                                      |
-| Fonts                     | X120 screenshot has heavy outlined lettering                                                                                           | Independent 5 × 7 bitmap alphabet; no claim font dimensions match Samsung                                                                                         |
-| Menus                     | No original P510 menu frame                                                                                                            | Blue Samsung-inspired two-item menu with two softkey labels; approximate colors and positions                                                                     |
-| Sound                     | X120 repository has MMF filenames; sounds not listened to or decoded                                                                   | Synthesized opt-in square-wave tones, explicitly approximate; no original music                                                                                   |
-| Score, levels, timer      | Partial related-source behavior, not P510 formula                                                                                      | Independent progression, reproducible seeds, documented provisional scoring and timer values                                                                      |
-| Input                     | X120 port README: arrows, place, fast, menu                                                                                            | Pointer Events and keypad-like desktop mapping; natural browser adaptations, original P510 mapping unknown                                                        |
+The prototype is still not a verified original-phone replica. In particular, BubbleSmile does not yet implement the two original mode rules. No historical accuracy is claimed for its countdown/level target or Fun2Link's existing score/stage definitions.
 
-The X120 screenshot was viewed directly; it is not an original P510 frame and not an equivalent in-game state. Consequently no numerical pixel-difference score, pixel-perfect claim or exact sprite comparison is meaningful. Original artwork/code/audio were not copied from the reference repositories, which had no root license file identified.
+Reference camera frames are in `docs/research/frames/`; current browser screenshots are below. They permit a qualitative comparison, not a pixel-error metric: framing, perspective, optical color shift and moire differ. Original assets were not extracted into the game. Artwork remains independently redrawn and approximate.
 
-## Implementation screenshots
+![Updated browser BubbleSmile](screenshots/bubblesmile.png)
 
-These are real canvas screenshots captured by Playwright, not historical references. The mobile-sized Chromium capture uses device scale factor 3; the stored image is scaled relative to the internal 128 × 160 framebuffer. Test outputs can be regenerated with `npm run build && npm run test:browser`.
+![Updated browser Fun2Link](screenshots/fun2link.png)
 
-![Browser BubbleSmile approximation](screenshots/bubblesmile.png)
+## Validation history
 
-![Browser Fun2Link approximation](screenshots/fun2link.png)
+The first published baseline passed 19 unit tests and 11 Chromium browser checks, with one intentional desktop skip for a mobile-only test. Type checks, production build, root and repository-subdirectory offline reload passed. The first offline failure was corrected by ignoring Origin variation for cached static asset lookup. The GitHub validation and Pages deployment for commit 12ad292 also succeeded.
 
-Screenshot inspection found and corrected bottom-row BubbleSmile clipping and a repeated Fun2Link queue piece. Selection triangles now use integer pixel line rasterization. No unrelated stock assets are used.
-
-## Executed validation
-
-- Node 24 dependency installation and repeatable `npm ci` with a frozen lockfile: passed.
-- TypeScript checks: passed.
-- Vitest: 19 tests passed across two files, covering both engines and fixed-step behavior at 60/90/120 Hz, pause reset and long-stall limits.
-- Production build: passed with seven emitted files in the offline precache (plus root document alias).
-- Chromium desktop and mobile-sized browser suite: 11 passed, 1 intentionally skipped (touch-only scenario on desktop). Launch/switch, keyboard, pointer cancel, sound preference, restart, score separation, resize, offline reload, real touch dispatch, paused-frame stability and full Fun2Link stage clear/advance/failure/restart exercised.
-- Repository base `/Samsung_SGH-P510_Games/`: production build and same browser suite passed, including offline reload under that scope.
-- The first offline test failed because cached Vite responses varied by Origin. Cache matching for this static application now ignores that variation; repeated offline checks passed after correction.
-
-No physical iPhone/Android test, Safari/WebKit test, audible waveform comparison, GitHub-hosted workflow execution, live Pages deployment, or fresh-cloud-snapshot restoration is claimed. Browser tests exercise functional input and behavior, not historical authenticity.
+The footage revision passed TypeScript, 19 unit tests, production build and 13 Chromium browser checks with one intentional desktop skip for a touch-only scenario. Root and repository-subdirectory browser runs both passed, including offline reload. This includes a new regression test for Back button, # key and footer navigation. Physical iPhone/Android, Safari/WebKit, original audio matching and exact pixel fidelity remain unverified.
 
 ## Remaining preservation work
 
-1. Obtain direct upload of the user's Rutube video or allow access to its actual frames/media. Establish which game/handset/version it demonstrates before treating it as P510 evidence.
-2. Obtain a readable exact-phone manual and verified hardware specification; establish main LCD versus outer LCD, game viewport, colors, softkeys and native/Java packaging.
-3. Obtain legally reusable exact-phone screenshots, stage data and sound references. Record frame timestamps and provenance, then compare equivalent states against these browser captures.
-4. Replace provisional art, formulas, timers, layouts, stages and controls only when supported by evidence; update every affected confidence label and regression test.
-5. Validate on physical iOS Safari and Android Chrome, including home-screen installation and offline cold launch.
-
-Research domains and repeatable installation/start instructions were saved as a cloud environment configuration draft. Saving does not apply or publish that configuration. Review and save the changes in environment settings, then publish when appropriate. No push or deployment was performed.
+1. Establish exact handset/version and native display/viewport from a readable manual or original artifact.
+2. Analyze full mode behavior, inputs, score changes and loss conditions using uncut recordings. Recover Timed Mode as well as the apparently selected Skilled Mode.
+3. Obtain audible original recordings; these uploads are silent.
+4. Recover stage geometry, queue direction, scoring and crossing semantics event by event rather than fitting one result screen.
+5. Validate physical iOS/Android installation and offline cold launch.
